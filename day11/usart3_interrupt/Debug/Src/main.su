@@ -1,0 +1,6 @@
+../Src/main.cpp:18:17:void USART3_IRQHandler()	16	static
+../Src/main.cpp:36:5:int main()	8	static
+../Src/main.cpp:49:6:void USART3_init()	4	static
+../Src/main.cpp:85:6:void USART3_write(uint8_t)	16	static
+../Src/main.cpp:96:9:uint8_t USART3_read()	4	static
+../Src/main.cpp:103:6:void USART3_string(char*)	24	static

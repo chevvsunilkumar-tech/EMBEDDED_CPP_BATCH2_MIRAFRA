@@ -1,0 +1,17 @@
+../Src/main.cpp:8:6:void delay_ms(int)	2
+../Src/main.cpp:33:5:Button::Button(GPIO_TypeDef*, uint16_t)	1
+../Src/main.cpp:36:10:void Button::attach(ButtonObserver*)	2
+../Src/main.cpp:42:9:int Button::read()	2
+../Src/main.cpp:47:10:void Button::poll()	4
+../Src/main.cpp:67:10:void Button::notify()	2
+../Src/main.cpp:17:7:constexpr ButtonObserver::ButtonObserver()	1
+../Src/main.cpp:83:5:Green_Led::Green_Led(GPIO_TypeDef*, uint16_t)	1
+../Src/main.cpp:86:10:virtual void Green_Led::onButtonPressed()	2
+../Src/main.cpp:104:5:Orange_Led::Orange_Led(GPIO_TypeDef*, uint16_t)	1
+../Src/main.cpp:107:10:virtual void Orange_Led::onButtonPressed()	1
+../Src/main.cpp:127:5:Red_Led::Red_Led(GPIO_TypeDef*, uint16_t)	1
+../Src/main.cpp:130:10:virtual void Red_Led::onButtonPressed()	1
+../Src/main.cpp:154:5:Blue_Led::Blue_Led(GPIO_TypeDef*, uint16_t)	1
+../Src/main.cpp:157:10:virtual void Blue_Led::onButtonPressed()	1
+../Src/main.cpp:165:6:void GPIO_Init()	2
+../Src/main.cpp:183:5:int main()	1

@@ -1,0 +1,10 @@
+../Src/main.cpp:21:5:int fun_divide(int, int)	16	static
+../Src/main.cpp:27:5:int main()	24	static
+../Src/main.cpp:112:41:void MemManage_Handler()	0	static,ignoring_inline_asm
+../Src/main.cpp:121:39:void BusFault_Handler()	0	static,ignoring_inline_asm
+../Src/main.cpp:130:40:void UsageFault_Handler()	0	static,ignoring_inline_asm
+../Src/main.cpp:139:40:void HardFault_Handler()	0	static,ignoring_inline_asm
+../Src/main.cpp:147:17:void MemManage_Handler_c(uint32_t*)	24	static,ignoring_inline_asm
+../Src/main.cpp:174:17:void BusFault_Handler_c(uint32_t*)	24	static,ignoring_inline_asm
+../Src/main.cpp:200:17:void HardFault_Handler_c(uint32_t*)	24	static,ignoring_inline_asm
+../Src/main.cpp:225:17:void UsageFault_Handler_c(uint32_t*)	24	static,ignoring_inline_asm
