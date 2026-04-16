@@ -1,0 +1,12 @@
+../Src/main.cpp:40:17:static void GPIO::enable_clock()	1
+../Src/main.cpp:46:17:static void GPIO::set_output(uint32_t)	1
+../Src/main.cpp:53:17:static void GPIO::set_input(uint32_t)	1
+../Src/main.cpp:59:17:static void GPIO::toggle(uint32_t)	1
+../Src/main.cpp:66:17:static bool GPIO::sw_status()	1
+../Src/main.cpp:74:6:void delay()	2
+../Src/main.cpp:83:5:int main()	2
+../Src/main.cpp:27:36:static volatile uint32_t& reg<address>::value() [with long unsigned int address = 1073887280]	1
+../Src/main.cpp:27:36:static volatile uint32_t& reg<address>::value() [with long unsigned int address = 1073875968]	1
+../Src/main.cpp:27:36:static volatile uint32_t& reg<address>::value() [with long unsigned int address = 1073872896]	1
+../Src/main.cpp:27:36:static volatile uint32_t& reg<address>::value() [with long unsigned int address = 1073875988]	1
+../Src/main.cpp:27:36:static volatile uint32_t& reg<address>::value() [with long unsigned int address = 1073872912]	1
