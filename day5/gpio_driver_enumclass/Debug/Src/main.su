@@ -1,0 +1,8 @@
+../Src/main.cpp:37:5:GPIOClockGuard::GPIOClockGuard()	16	static
+../Src/main.cpp:43:5:GPIOClockGuard::~GPIOClockGuard()	16	static
+../Src/main.cpp:54:17:static void GPIO::set_output(LED)	24	static
+../Src/main.cpp:62:17:static void GPIO::set_input(uint32_t)	16	static
+../Src/main.cpp:67:17:static void GPIO::toggle(LED)	24	static
+../Src/main.cpp:78:17:static bool GPIO::read(uint32_t)	16	static
+../Src/main.cpp:85:6:void delay()	16	static
+../Src/main.cpp:93:5:int main()	16	static

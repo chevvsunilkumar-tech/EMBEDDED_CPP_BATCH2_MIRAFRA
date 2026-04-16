@@ -1,0 +1,21 @@
+../Src/main.cpp:29:18:static auto& RCC::AHB1ENR()	8	static
+../Src/main.cpp:131:6:void delay()	16	static,ignoring_inline_asm
+../Src/main.cpp:142:5:int main()	16	static
+../Src/main.cpp:10:31:static volatile uint32_t& Register<address>::value() [with unsigned int address = 1073887280]	4	static
+../Src/main.cpp:59:17:static void GPIO<Port, pin>::enable_clock() [with Port = GPIO_Port<1073879040>; unsigned char pin = 8]	8	static
+../Src/main.cpp:107:5:LED<GPIO_PIN>::LED() [with GPIO_PIN = GPIO<GPIO_Port<1073879040>, 8>]	16	static
+../Src/main.cpp:107:5:LED<GPIO_PIN>::LED() [with GPIO_PIN = GPIO<GPIO_Port<1073879040>, 10>]	16	static
+../Src/main.cpp:112:10:void LED<GPIO_PIN>::on() [with GPIO_PIN = GPIO<GPIO_Port<1073879040>, 8>]	16	static
+../Src/main.cpp:117:10:void LED<GPIO_PIN>::off() [with GPIO_PIN = GPIO<GPIO_Port<1073879040>, 8>]	16	static
+../Src/main.cpp:112:10:void LED<GPIO_PIN>::on() [with GPIO_PIN = GPIO<GPIO_Port<1073879040>, 10>]	16	static
+../Src/main.cpp:117:10:void LED<GPIO_PIN>::off() [with GPIO_PIN = GPIO<GPIO_Port<1073879040>, 10>]	16	static
+../Src/main.cpp:41:18:static auto& GPIO_Port<base>::MODER() [with unsigned int base = 1073879040]	8	static
+../Src/main.cpp:64:17:static void GPIO<Port, pin>::set_output() [with Port = GPIO_Port<1073879040>; unsigned char pin = 8]	8	static
+../Src/main.cpp:64:17:static void GPIO<Port, pin>::set_output() [with Port = GPIO_Port<1073879040>; unsigned char pin = 10]	8	static
+../Src/main.cpp:47:18:static auto& GPIO_Port<base>::BSRR() [with unsigned int base = 1073879040]	8	static
+../Src/main.cpp:70:17:static void GPIO<Port, pin>::set() [with Port = GPIO_Port<1073879040>; unsigned char pin = 8]	8	static
+../Src/main.cpp:75:17:static void GPIO<Port, pin>::reset() [with Port = GPIO_Port<1073879040>; unsigned char pin = 8]	8	static
+../Src/main.cpp:70:17:static void GPIO<Port, pin>::set() [with Port = GPIO_Port<1073879040>; unsigned char pin = 10]	8	static
+../Src/main.cpp:75:17:static void GPIO<Port, pin>::reset() [with Port = GPIO_Port<1073879040>; unsigned char pin = 10]	8	static
+../Src/main.cpp:10:31:static volatile uint32_t& Register<address>::value() [with unsigned int address = 1073879040]	4	static
+../Src/main.cpp:10:31:static volatile uint32_t& Register<address>::value() [with unsigned int address = 1073879064]	4	static
