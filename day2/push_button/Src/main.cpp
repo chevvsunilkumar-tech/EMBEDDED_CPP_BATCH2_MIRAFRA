@@ -1,0 +1,53 @@
+int main()
+{
+    unsigned int *ahb1 = (unsigned int*)0x40023830;
+    unsigned int *gpio_odr = (unsigned int*)0x40020C14;
+    unsigned int *gpiod_moder = (unsigned int*)0x40020C00;
+   unsigned int *gpio_amoder = (unsigned int*) 0x40020000;
+  unsigned int *gpio_idr = (unsigned int*) 0x40020010;
+
+    *ahb1 |= (1 |(1<<3));
+
+
+    *gpiod_moder &= ~(3 << 24);
+      *gpiod_moder |= (1 << 24);
+
+     *gpiod_moder &= ~(3 << 26);
+    *gpiod_moder |= (1 << 26);
+    \
+     *gpiod_moder &= ~(3 << 28);
+    *gpiod_moder |= (1 << 28);
+
+     *gpiod_moder &= ~(3 << 30);
+    *gpiod_moder |= (1 << 30);
+
+    *gpio_amoder &= ~(3<<0);
+
+
+    while(1)
+    {
+
+    	if((*gpio_idr) &1)
+    	{
+    		 *gpio_odr &= ~(1 << 14);
+    		  *gpio_odr &= ~(1 << 15);
+
+    		 *gpio_odr |= (1 << 12); //to turn on led
+    		 *gpio_odr |= (1 << 13);
+
+    		// for(int i = 0; i < 30000; i++);
+    	}
+    	else
+    	{
+    	    *gpio_odr &= ~(1 << 12); // to turn off led
+    	     *gpio_odr &= ~(1 << 13);
+
+    		 *gpio_odr |= (1 << 14);
+    		 *gpio_odr |= (1 << 15);
+
+    		//  for( int i = 0; i < 30000; i++);
+    	}
+
+
+    }
+}

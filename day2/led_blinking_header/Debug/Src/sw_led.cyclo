@@ -1,0 +1,4 @@
+../Src/sw_led.cpp:4:6:void SW_LED::on()	1
+../Src/sw_led.cpp:9:6:void SW_LED::off()	1
+../Src/sw_led.cpp:14:6:void SW_LED::toggle()	1
+../Src/sw_led.cpp:19:6:bool SW_LED::isswitch_on()	1
