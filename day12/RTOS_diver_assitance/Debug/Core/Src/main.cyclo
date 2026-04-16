@@ -1,0 +1,7 @@
+../Core/Src/main.cpp:96:5:int main()	3
+../Core/Src/main.cpp:165:6:void SystemClock_Config()	3
+../Core/Src/main.cpp:209:13:void MX_GPIO_Init()	1
+../Core/Src/main.cpp:344:6:void vDriverAssistanceTask(void*)	4
+../Core/Src/main.cpp:378:6:void vEmergencySystemTask(void*)	5
+../Core/Src/main.cpp:428:6:void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*)	2
+../Core/Src/main.cpp:445:6:void Error_Handler()	1
