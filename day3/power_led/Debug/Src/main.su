@@ -1,0 +1,2 @@
+../Inc/power_led.h:21:5:POWER_LED::POWER_LED(volatile GPIO_TypeDef*)	16	static
+../Src/main.cpp:5:5:int main()	40	static
