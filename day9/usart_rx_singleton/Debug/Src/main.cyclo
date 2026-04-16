@@ -1,0 +1,8 @@
+../Src/main.cpp:8:17:static void Delay::ms(int)	3
+../Src/main.cpp:19:5:USART1_Driver::USART1_Driver()	1
+../Src/main.cpp:42:27:static USART1_Driver& USART1_Driver::instance()	3
+../Src/main.cpp:48:13:uint8_t USART1_Driver::read()	2
+../Src/main.cpp:62:5:LEDController::LEDController()	1
+../Src/main.cpp:85:27:static LEDController& LEDController::instance()	3
+../Src/main.cpp:91:10:void LEDController::process(USART1_Driver&)	5
+../Src/main.cpp:126:5:int main()	1

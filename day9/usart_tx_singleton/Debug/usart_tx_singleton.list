@@ -1,0 +1,955 @@
+
+usart_tx_singleton.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .isr_vector   00000188  08000000  08000000  00001000  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  1 .text         000005cc  08000188  08000188  00001188  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .rodata       00000000  08000754  0800075c  0000175c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .ARM.extab    00000000  08000754  08000754  0000175c  2**0
+                  CONTENTS, READONLY
+  4 .ARM          00000000  08000754  08000754  0000175c  2**0
+                  CONTENTS, READONLY
+  5 .preinit_array 00000000  08000754  0800075c  0000175c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  6 .init_array   00000004  08000754  08000754  00001754  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  7 .fini_array   00000004  08000758  08000758  00001758  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  8 .data         00000000  20000000  20000000  0000175c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  9 .ccmram       00000000  10000000  10000000  0000175c  2**0
+                  CONTENTS
+ 10 .bss          00000030  20000000  20000000  00002000  2**2
+                  ALLOC
+ 11 ._user_heap_stack 00000600  20000030  20000030  00002000  2**0
+                  ALLOC
+ 12 .ARM.attributes 00000030  00000000  00000000  0000175c  2**0
+                  CONTENTS, READONLY
+ 13 .debug_info   00000505  00000000  00000000  0000178c  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 14 .debug_abbrev 000002a1  00000000  00000000  00001c91  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 15 .debug_aranges 00000080  00000000  00000000  00001f38  2**3
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 16 .debug_rnglists 00000059  00000000  00000000  00001fb8  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 17 .debug_macro  00014a97  00000000  00000000  00002011  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 18 .debug_line   000006bd  00000000  00000000  00016aa8  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 19 .debug_str    00071c56  00000000  00000000  00017165  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 20 .comment      00000043  00000000  00000000  00088dbb  2**0
+                  CONTENTS, READONLY
+ 21 .debug_frame  00000188  00000000  00000000  00088e00  2**2
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 22 .debug_line_str 0000006c  00000000  00000000  00088f88  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+
+Disassembly of section .text:
+
+08000188 <__do_global_dtors_aux>:
+ 8000188:	b510      	push	{r4, lr}
+ 800018a:	4c05      	ldr	r4, [pc, #20]	@ (80001a0 <__do_global_dtors_aux+0x18>)
+ 800018c:	7823      	ldrb	r3, [r4, #0]
+ 800018e:	b933      	cbnz	r3, 800019e <__do_global_dtors_aux+0x16>
+ 8000190:	4b04      	ldr	r3, [pc, #16]	@ (80001a4 <__do_global_dtors_aux+0x1c>)
+ 8000192:	b113      	cbz	r3, 800019a <__do_global_dtors_aux+0x12>
+ 8000194:	4804      	ldr	r0, [pc, #16]	@ (80001a8 <__do_global_dtors_aux+0x20>)
+ 8000196:	f3af 8000 	nop.w
+ 800019a:	2301      	movs	r3, #1
+ 800019c:	7023      	strb	r3, [r4, #0]
+ 800019e:	bd10      	pop	{r4, pc}
+ 80001a0:	20000000 	.word	0x20000000
+ 80001a4:	00000000 	.word	0x00000000
+ 80001a8:	0800073c 	.word	0x0800073c
+
+080001ac <frame_dummy>:
+ 80001ac:	b508      	push	{r3, lr}
+ 80001ae:	4b03      	ldr	r3, [pc, #12]	@ (80001bc <frame_dummy+0x10>)
+ 80001b0:	b11b      	cbz	r3, 80001ba <frame_dummy+0xe>
+ 80001b2:	4903      	ldr	r1, [pc, #12]	@ (80001c0 <frame_dummy+0x14>)
+ 80001b4:	4803      	ldr	r0, [pc, #12]	@ (80001c4 <frame_dummy+0x18>)
+ 80001b6:	f3af 8000 	nop.w
+ 80001ba:	bd08      	pop	{r3, pc}
+ 80001bc:	00000000 	.word	0x00000000
+ 80001c0:	20000004 	.word	0x20000004
+ 80001c4:	0800073c 	.word	0x0800073c
+
+080001c8 <_ZN5Delay2msEi>:
+
+//delay
+class Delay
+{
+public:
+    static void ms(int n)
+ 80001c8:	b480      	push	{r7}
+ 80001ca:	b085      	sub	sp, #20
+ 80001cc:	af00      	add	r7, sp, #0
+ 80001ce:	6078      	str	r0, [r7, #4]
+    {
+        for (; n > 0; n--)
+ 80001d0:	e012      	b.n	80001f8 <_ZN5Delay2msEi+0x30>
+            for (volatile int i = 0; i < 2000; i++);
+ 80001d2:	2300      	movs	r3, #0
+ 80001d4:	60fb      	str	r3, [r7, #12]
+ 80001d6:	e002      	b.n	80001de <_ZN5Delay2msEi+0x16>
+ 80001d8:	68fb      	ldr	r3, [r7, #12]
+ 80001da:	3301      	adds	r3, #1
+ 80001dc:	60fb      	str	r3, [r7, #12]
+ 80001de:	68fb      	ldr	r3, [r7, #12]
+ 80001e0:	f240 72cf 	movw	r2, #1999	@ 0x7cf
+ 80001e4:	4293      	cmp	r3, r2
+ 80001e6:	bfd4      	ite	le
+ 80001e8:	2301      	movle	r3, #1
+ 80001ea:	2300      	movgt	r3, #0
+ 80001ec:	b2db      	uxtb	r3, r3
+ 80001ee:	2b00      	cmp	r3, #0
+ 80001f0:	d1f2      	bne.n	80001d8 <_ZN5Delay2msEi+0x10>
+        for (; n > 0; n--)
+ 80001f2:	687b      	ldr	r3, [r7, #4]
+ 80001f4:	3b01      	subs	r3, #1
+ 80001f6:	607b      	str	r3, [r7, #4]
+ 80001f8:	687b      	ldr	r3, [r7, #4]
+ 80001fa:	2b00      	cmp	r3, #0
+ 80001fc:	dce9      	bgt.n	80001d2 <_ZN5Delay2msEi+0xa>
+    }
+ 80001fe:	bf00      	nop
+ 8000200:	bf00      	nop
+ 8000202:	3714      	adds	r7, #20
+ 8000204:	46bd      	mov	sp, r7
+ 8000206:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800020a:	4770      	bx	lr
+
+0800020c <_ZN13USART3_DriverC1Ev>:
+
+//usart3 for transmitter
+class USART3_Driver
+{
+private:
+    USART3_Driver()
+ 800020c:	b480      	push	{r7}
+ 800020e:	b083      	sub	sp, #12
+ 8000210:	af00      	add	r7, sp, #0
+ 8000212:	6078      	str	r0, [r7, #4]
+    {
+        RCC->AHB1ENR |= (1U << 2);   // GPIOC
+ 8000214:	4b2c      	ldr	r3, [pc, #176]	@ (80002c8 <_ZN13USART3_DriverC1Ev+0xbc>)
+ 8000216:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
+ 8000218:	4a2b      	ldr	r2, [pc, #172]	@ (80002c8 <_ZN13USART3_DriverC1Ev+0xbc>)
+ 800021a:	f043 0304 	orr.w	r3, r3, #4
+ 800021e:	6313      	str	r3, [r2, #48]	@ 0x30
+        RCC->APB1ENR |= (1U << 18);  // USART3
+ 8000220:	4b29      	ldr	r3, [pc, #164]	@ (80002c8 <_ZN13USART3_DriverC1Ev+0xbc>)
+ 8000222:	6c1b      	ldr	r3, [r3, #64]	@ 0x40
+ 8000224:	4a28      	ldr	r2, [pc, #160]	@ (80002c8 <_ZN13USART3_DriverC1Ev+0xbc>)
+ 8000226:	f443 2380 	orr.w	r3, r3, #262144	@ 0x40000
+ 800022a:	6413      	str	r3, [r2, #64]	@ 0x40
+
+        // PC10 TX
+        GPIOC->MODER &= ~(3U << 20);
+ 800022c:	4b27      	ldr	r3, [pc, #156]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 800022e:	681b      	ldr	r3, [r3, #0]
+ 8000230:	4a26      	ldr	r2, [pc, #152]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 8000232:	f423 1340 	bic.w	r3, r3, #3145728	@ 0x300000
+ 8000236:	6013      	str	r3, [r2, #0]
+        GPIOC->MODER |=  (2U << 20);
+ 8000238:	4b24      	ldr	r3, [pc, #144]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 800023a:	681b      	ldr	r3, [r3, #0]
+ 800023c:	4a23      	ldr	r2, [pc, #140]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 800023e:	f443 1300 	orr.w	r3, r3, #2097152	@ 0x200000
+ 8000242:	6013      	str	r3, [r2, #0]
+        GPIOC->AFR[1] &= ~(0xFU << 8);
+ 8000244:	4b21      	ldr	r3, [pc, #132]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 8000246:	6a5b      	ldr	r3, [r3, #36]	@ 0x24
+ 8000248:	4a20      	ldr	r2, [pc, #128]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 800024a:	f423 6370 	bic.w	r3, r3, #3840	@ 0xf00
+ 800024e:	6253      	str	r3, [r2, #36]	@ 0x24
+        GPIOC->AFR[1] |=  (7U << 8);
+ 8000250:	4b1e      	ldr	r3, [pc, #120]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 8000252:	6a5b      	ldr	r3, [r3, #36]	@ 0x24
+ 8000254:	4a1d      	ldr	r2, [pc, #116]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 8000256:	f443 63e0 	orr.w	r3, r3, #1792	@ 0x700
+ 800025a:	6253      	str	r3, [r2, #36]	@ 0x24
+
+        // PC11 RX
+        GPIOC->MODER &= ~(3U << 22);
+ 800025c:	4b1b      	ldr	r3, [pc, #108]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 800025e:	681b      	ldr	r3, [r3, #0]
+ 8000260:	4a1a      	ldr	r2, [pc, #104]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 8000262:	f423 0340 	bic.w	r3, r3, #12582912	@ 0xc00000
+ 8000266:	6013      	str	r3, [r2, #0]
+        GPIOC->MODER |=  (2U << 22);
+ 8000268:	4b18      	ldr	r3, [pc, #96]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 800026a:	681b      	ldr	r3, [r3, #0]
+ 800026c:	4a17      	ldr	r2, [pc, #92]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 800026e:	f443 0300 	orr.w	r3, r3, #8388608	@ 0x800000
+ 8000272:	6013      	str	r3, [r2, #0]
+        GPIOC->AFR[1] &= ~(0xFU << 12);
+ 8000274:	4b15      	ldr	r3, [pc, #84]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 8000276:	6a5b      	ldr	r3, [r3, #36]	@ 0x24
+ 8000278:	4a14      	ldr	r2, [pc, #80]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 800027a:	f423 4370 	bic.w	r3, r3, #61440	@ 0xf000
+ 800027e:	6253      	str	r3, [r2, #36]	@ 0x24
+        GPIOC->AFR[1] |=  (7U << 12);
+ 8000280:	4b12      	ldr	r3, [pc, #72]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 8000282:	6a5b      	ldr	r3, [r3, #36]	@ 0x24
+ 8000284:	4a11      	ldr	r2, [pc, #68]	@ (80002cc <_ZN13USART3_DriverC1Ev+0xc0>)
+ 8000286:	f443 43e0 	orr.w	r3, r3, #28672	@ 0x7000
+ 800028a:	6253      	str	r3, [r2, #36]	@ 0x24
+
+        USART3->BRR = 0x0683;
+ 800028c:	4b10      	ldr	r3, [pc, #64]	@ (80002d0 <_ZN13USART3_DriverC1Ev+0xc4>)
+ 800028e:	f240 6283 	movw	r2, #1667	@ 0x683
+ 8000292:	609a      	str	r2, [r3, #8]
+        USART3->CR1 |= (1U << 3);  // TE
+ 8000294:	4b0e      	ldr	r3, [pc, #56]	@ (80002d0 <_ZN13USART3_DriverC1Ev+0xc4>)
+ 8000296:	68db      	ldr	r3, [r3, #12]
+ 8000298:	4a0d      	ldr	r2, [pc, #52]	@ (80002d0 <_ZN13USART3_DriverC1Ev+0xc4>)
+ 800029a:	f043 0308 	orr.w	r3, r3, #8
+ 800029e:	60d3      	str	r3, [r2, #12]
+        USART3->CR1 |= (1U << 2);  // RE
+ 80002a0:	4b0b      	ldr	r3, [pc, #44]	@ (80002d0 <_ZN13USART3_DriverC1Ev+0xc4>)
+ 80002a2:	68db      	ldr	r3, [r3, #12]
+ 80002a4:	4a0a      	ldr	r2, [pc, #40]	@ (80002d0 <_ZN13USART3_DriverC1Ev+0xc4>)
+ 80002a6:	f043 0304 	orr.w	r3, r3, #4
+ 80002aa:	60d3      	str	r3, [r2, #12]
+        USART3->CR1 |= (1U << 13); // UE
+ 80002ac:	4b08      	ldr	r3, [pc, #32]	@ (80002d0 <_ZN13USART3_DriverC1Ev+0xc4>)
+ 80002ae:	68db      	ldr	r3, [r3, #12]
+ 80002b0:	4a07      	ldr	r2, [pc, #28]	@ (80002d0 <_ZN13USART3_DriverC1Ev+0xc4>)
+ 80002b2:	f443 5300 	orr.w	r3, r3, #8192	@ 0x2000
+ 80002b6:	60d3      	str	r3, [r2, #12]
+    }
+ 80002b8:	687b      	ldr	r3, [r7, #4]
+ 80002ba:	4618      	mov	r0, r3
+ 80002bc:	370c      	adds	r7, #12
+ 80002be:	46bd      	mov	sp, r7
+ 80002c0:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80002c4:	4770      	bx	lr
+ 80002c6:	bf00      	nop
+ 80002c8:	40023800 	.word	0x40023800
+ 80002cc:	40020800 	.word	0x40020800
+ 80002d0:	40004800 	.word	0x40004800
+
+080002d4 <_ZN13USART3_Driver8instanceEv>:
+
+public:
+    static USART3_Driver& instance()
+ 80002d4:	b580      	push	{r7, lr}
+ 80002d6:	af00      	add	r7, sp, #0
+    {
+        static USART3_Driver obj;
+ 80002d8:	4b10      	ldr	r3, [pc, #64]	@ (800031c <_ZN13USART3_Driver8instanceEv+0x48>)
+ 80002da:	681b      	ldr	r3, [r3, #0]
+ 80002dc:	f3bf 8f5b 	dmb	ish
+ 80002e0:	f003 0301 	and.w	r3, r3, #1
+ 80002e4:	2b00      	cmp	r3, #0
+ 80002e6:	bf0c      	ite	eq
+ 80002e8:	2301      	moveq	r3, #1
+ 80002ea:	2300      	movne	r3, #0
+ 80002ec:	b2db      	uxtb	r3, r3
+ 80002ee:	2b00      	cmp	r3, #0
+ 80002f0:	d010      	beq.n	8000314 <_ZN13USART3_Driver8instanceEv+0x40>
+ 80002f2:	480a      	ldr	r0, [pc, #40]	@ (800031c <_ZN13USART3_Driver8instanceEv+0x48>)
+ 80002f4:	f000 f9ef 	bl	80006d6 <__cxa_guard_acquire>
+ 80002f8:	4603      	mov	r3, r0
+ 80002fa:	2b00      	cmp	r3, #0
+ 80002fc:	bf14      	ite	ne
+ 80002fe:	2301      	movne	r3, #1
+ 8000300:	2300      	moveq	r3, #0
+ 8000302:	b2db      	uxtb	r3, r3
+ 8000304:	2b00      	cmp	r3, #0
+ 8000306:	d005      	beq.n	8000314 <_ZN13USART3_Driver8instanceEv+0x40>
+ 8000308:	4805      	ldr	r0, [pc, #20]	@ (8000320 <_ZN13USART3_Driver8instanceEv+0x4c>)
+ 800030a:	f7ff ff7f 	bl	800020c <_ZN13USART3_DriverC1Ev>
+ 800030e:	4803      	ldr	r0, [pc, #12]	@ (800031c <_ZN13USART3_Driver8instanceEv+0x48>)
+ 8000310:	f000 f9ed 	bl	80006ee <__cxa_guard_release>
+        return obj;
+ 8000314:	4b02      	ldr	r3, [pc, #8]	@ (8000320 <_ZN13USART3_Driver8instanceEv+0x4c>)
+    }
+ 8000316:	4618      	mov	r0, r3
+ 8000318:	bd80      	pop	{r7, pc}
+ 800031a:	bf00      	nop
+ 800031c:	20000020 	.word	0x20000020
+ 8000320:	2000001c 	.word	0x2000001c
+
+08000324 <_ZN13USART3_Driver5writeEh>:
+
+    void write(uint8_t ch)
+ 8000324:	b480      	push	{r7}
+ 8000326:	b083      	sub	sp, #12
+ 8000328:	af00      	add	r7, sp, #0
+ 800032a:	6078      	str	r0, [r7, #4]
+ 800032c:	460b      	mov	r3, r1
+ 800032e:	70fb      	strb	r3, [r7, #3]
+    {
+        while (!(USART3->SR & (1U << 7))); // TXE
+ 8000330:	bf00      	nop
+ 8000332:	4b10      	ldr	r3, [pc, #64]	@ (8000374 <_ZN13USART3_Driver5writeEh+0x50>)
+ 8000334:	681b      	ldr	r3, [r3, #0]
+ 8000336:	f003 0380 	and.w	r3, r3, #128	@ 0x80
+ 800033a:	2b00      	cmp	r3, #0
+ 800033c:	bf0c      	ite	eq
+ 800033e:	2301      	moveq	r3, #1
+ 8000340:	2300      	movne	r3, #0
+ 8000342:	b2db      	uxtb	r3, r3
+ 8000344:	2b00      	cmp	r3, #0
+ 8000346:	d1f4      	bne.n	8000332 <_ZN13USART3_Driver5writeEh+0xe>
+        USART3->DR = ch;
+ 8000348:	4a0a      	ldr	r2, [pc, #40]	@ (8000374 <_ZN13USART3_Driver5writeEh+0x50>)
+ 800034a:	78fb      	ldrb	r3, [r7, #3]
+ 800034c:	6053      	str	r3, [r2, #4]
+        while (!(USART3->SR & (1U << 6))); // TC
+ 800034e:	bf00      	nop
+ 8000350:	4b08      	ldr	r3, [pc, #32]	@ (8000374 <_ZN13USART3_Driver5writeEh+0x50>)
+ 8000352:	681b      	ldr	r3, [r3, #0]
+ 8000354:	f003 0340 	and.w	r3, r3, #64	@ 0x40
+ 8000358:	2b00      	cmp	r3, #0
+ 800035a:	bf0c      	ite	eq
+ 800035c:	2301      	moveq	r3, #1
+ 800035e:	2300      	movne	r3, #0
+ 8000360:	b2db      	uxtb	r3, r3
+ 8000362:	2b00      	cmp	r3, #0
+ 8000364:	d1f4      	bne.n	8000350 <_ZN13USART3_Driver5writeEh+0x2c>
+    }
+ 8000366:	bf00      	nop
+ 8000368:	bf00      	nop
+ 800036a:	370c      	adds	r7, #12
+ 800036c:	46bd      	mov	sp, r7
+ 800036e:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000372:	4770      	bx	lr
+ 8000374:	40004800 	.word	0x40004800
+
+08000378 <_ZN16ButtonControllerC1Ev>:
+    uint8_t prev_status1 = 0;
+    uint8_t prev_status2 = 0;
+    uint8_t prev_status3 = 0;
+    uint8_t prev_status4 = 0;
+
+    ButtonController()
+ 8000378:	b480      	push	{r7}
+ 800037a:	b083      	sub	sp, #12
+ 800037c:	af00      	add	r7, sp, #0
+ 800037e:	6078      	str	r0, [r7, #4]
+    {
+ 8000380:	687b      	ldr	r3, [r7, #4]
+ 8000382:	2200      	movs	r2, #0
+ 8000384:	701a      	strb	r2, [r3, #0]
+ 8000386:	687b      	ldr	r3, [r7, #4]
+ 8000388:	2200      	movs	r2, #0
+ 800038a:	705a      	strb	r2, [r3, #1]
+ 800038c:	687b      	ldr	r3, [r7, #4]
+ 800038e:	2200      	movs	r2, #0
+ 8000390:	709a      	strb	r2, [r3, #2]
+ 8000392:	687b      	ldr	r3, [r7, #4]
+ 8000394:	2200      	movs	r2, #0
+ 8000396:	70da      	strb	r2, [r3, #3]
+ 8000398:	687b      	ldr	r3, [r7, #4]
+ 800039a:	2200      	movs	r2, #0
+ 800039c:	711a      	strb	r2, [r3, #4]
+ 800039e:	687b      	ldr	r3, [r7, #4]
+ 80003a0:	2200      	movs	r2, #0
+ 80003a2:	715a      	strb	r2, [r3, #5]
+ 80003a4:	687b      	ldr	r3, [r7, #4]
+ 80003a6:	2200      	movs	r2, #0
+ 80003a8:	719a      	strb	r2, [r3, #6]
+ 80003aa:	687b      	ldr	r3, [r7, #4]
+ 80003ac:	2200      	movs	r2, #0
+ 80003ae:	71da      	strb	r2, [r3, #7]
+        // Enable clocks
+        RCC->AHB1ENR |= (1U << 0); // GPIOA
+ 80003b0:	4b33      	ldr	r3, [pc, #204]	@ (8000480 <_ZN16ButtonControllerC1Ev+0x108>)
+ 80003b2:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
+ 80003b4:	4a32      	ldr	r2, [pc, #200]	@ (8000480 <_ZN16ButtonControllerC1Ev+0x108>)
+ 80003b6:	f043 0301 	orr.w	r3, r3, #1
+ 80003ba:	6313      	str	r3, [r2, #48]	@ 0x30
+        RCC->AHB1ENR |= (1U << 1); // GPIOB
+ 80003bc:	4b30      	ldr	r3, [pc, #192]	@ (8000480 <_ZN16ButtonControllerC1Ev+0x108>)
+ 80003be:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
+ 80003c0:	4a2f      	ldr	r2, [pc, #188]	@ (8000480 <_ZN16ButtonControllerC1Ev+0x108>)
+ 80003c2:	f043 0302 	orr.w	r3, r3, #2
+ 80003c6:	6313      	str	r3, [r2, #48]	@ 0x30
+        RCC->AHB1ENR |= (1U << 2); // GPIOC
+ 80003c8:	4b2d      	ldr	r3, [pc, #180]	@ (8000480 <_ZN16ButtonControllerC1Ev+0x108>)
+ 80003ca:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
+ 80003cc:	4a2c      	ldr	r2, [pc, #176]	@ (8000480 <_ZN16ButtonControllerC1Ev+0x108>)
+ 80003ce:	f043 0304 	orr.w	r3, r3, #4
+ 80003d2:	6313      	str	r3, [r2, #48]	@ 0x30
+        RCC->AHB1ENR |= (1U << 3); // GPIOD
+ 80003d4:	4b2a      	ldr	r3, [pc, #168]	@ (8000480 <_ZN16ButtonControllerC1Ev+0x108>)
+ 80003d6:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
+ 80003d8:	4a29      	ldr	r2, [pc, #164]	@ (8000480 <_ZN16ButtonControllerC1Ev+0x108>)
+ 80003da:	f043 0308 	orr.w	r3, r3, #8
+ 80003de:	6313      	str	r3, [r2, #48]	@ 0x30
+
+        // PA1
+        GPIOA->MODER &= ~(3U << 2);
+ 80003e0:	4b28      	ldr	r3, [pc, #160]	@ (8000484 <_ZN16ButtonControllerC1Ev+0x10c>)
+ 80003e2:	681b      	ldr	r3, [r3, #0]
+ 80003e4:	4a27      	ldr	r2, [pc, #156]	@ (8000484 <_ZN16ButtonControllerC1Ev+0x10c>)
+ 80003e6:	f023 030c 	bic.w	r3, r3, #12
+ 80003ea:	6013      	str	r3, [r2, #0]
+        GPIOA->PUPDR &= ~(3U << 2);
+ 80003ec:	4b25      	ldr	r3, [pc, #148]	@ (8000484 <_ZN16ButtonControllerC1Ev+0x10c>)
+ 80003ee:	68db      	ldr	r3, [r3, #12]
+ 80003f0:	4a24      	ldr	r2, [pc, #144]	@ (8000484 <_ZN16ButtonControllerC1Ev+0x10c>)
+ 80003f2:	f023 030c 	bic.w	r3, r3, #12
+ 80003f6:	60d3      	str	r3, [r2, #12]
+        GPIOA->PUPDR |=  (2U << 2);
+ 80003f8:	4b22      	ldr	r3, [pc, #136]	@ (8000484 <_ZN16ButtonControllerC1Ev+0x10c>)
+ 80003fa:	68db      	ldr	r3, [r3, #12]
+ 80003fc:	4a21      	ldr	r2, [pc, #132]	@ (8000484 <_ZN16ButtonControllerC1Ev+0x10c>)
+ 80003fe:	f043 0308 	orr.w	r3, r3, #8
+ 8000402:	60d3      	str	r3, [r2, #12]
+
+        // PB1
+        GPIOB->MODER &= ~(3U << 2);
+ 8000404:	4b20      	ldr	r3, [pc, #128]	@ (8000488 <_ZN16ButtonControllerC1Ev+0x110>)
+ 8000406:	681b      	ldr	r3, [r3, #0]
+ 8000408:	4a1f      	ldr	r2, [pc, #124]	@ (8000488 <_ZN16ButtonControllerC1Ev+0x110>)
+ 800040a:	f023 030c 	bic.w	r3, r3, #12
+ 800040e:	6013      	str	r3, [r2, #0]
+        GPIOB->PUPDR &= ~(3U << 2);
+ 8000410:	4b1d      	ldr	r3, [pc, #116]	@ (8000488 <_ZN16ButtonControllerC1Ev+0x110>)
+ 8000412:	68db      	ldr	r3, [r3, #12]
+ 8000414:	4a1c      	ldr	r2, [pc, #112]	@ (8000488 <_ZN16ButtonControllerC1Ev+0x110>)
+ 8000416:	f023 030c 	bic.w	r3, r3, #12
+ 800041a:	60d3      	str	r3, [r2, #12]
+        GPIOB->PUPDR |=  (2U << 2);
+ 800041c:	4b1a      	ldr	r3, [pc, #104]	@ (8000488 <_ZN16ButtonControllerC1Ev+0x110>)
+ 800041e:	68db      	ldr	r3, [r3, #12]
+ 8000420:	4a19      	ldr	r2, [pc, #100]	@ (8000488 <_ZN16ButtonControllerC1Ev+0x110>)
+ 8000422:	f043 0308 	orr.w	r3, r3, #8
+ 8000426:	60d3      	str	r3, [r2, #12]
+
+        // PC1
+        GPIOC->MODER &= ~(3U << 2);
+ 8000428:	4b18      	ldr	r3, [pc, #96]	@ (800048c <_ZN16ButtonControllerC1Ev+0x114>)
+ 800042a:	681b      	ldr	r3, [r3, #0]
+ 800042c:	4a17      	ldr	r2, [pc, #92]	@ (800048c <_ZN16ButtonControllerC1Ev+0x114>)
+ 800042e:	f023 030c 	bic.w	r3, r3, #12
+ 8000432:	6013      	str	r3, [r2, #0]
+        GPIOC->PUPDR &= ~(3U << 2);
+ 8000434:	4b15      	ldr	r3, [pc, #84]	@ (800048c <_ZN16ButtonControllerC1Ev+0x114>)
+ 8000436:	68db      	ldr	r3, [r3, #12]
+ 8000438:	4a14      	ldr	r2, [pc, #80]	@ (800048c <_ZN16ButtonControllerC1Ev+0x114>)
+ 800043a:	f023 030c 	bic.w	r3, r3, #12
+ 800043e:	60d3      	str	r3, [r2, #12]
+        GPIOC->PUPDR |=  (2U << 2);
+ 8000440:	4b12      	ldr	r3, [pc, #72]	@ (800048c <_ZN16ButtonControllerC1Ev+0x114>)
+ 8000442:	68db      	ldr	r3, [r3, #12]
+ 8000444:	4a11      	ldr	r2, [pc, #68]	@ (800048c <_ZN16ButtonControllerC1Ev+0x114>)
+ 8000446:	f043 0308 	orr.w	r3, r3, #8
+ 800044a:	60d3      	str	r3, [r2, #12]
+
+        // PD1
+        GPIOD->MODER &= ~(3U << 2);
+ 800044c:	4b10      	ldr	r3, [pc, #64]	@ (8000490 <_ZN16ButtonControllerC1Ev+0x118>)
+ 800044e:	681b      	ldr	r3, [r3, #0]
+ 8000450:	4a0f      	ldr	r2, [pc, #60]	@ (8000490 <_ZN16ButtonControllerC1Ev+0x118>)
+ 8000452:	f023 030c 	bic.w	r3, r3, #12
+ 8000456:	6013      	str	r3, [r2, #0]
+        GPIOD->PUPDR &= ~(3U << 2);
+ 8000458:	4b0d      	ldr	r3, [pc, #52]	@ (8000490 <_ZN16ButtonControllerC1Ev+0x118>)
+ 800045a:	68db      	ldr	r3, [r3, #12]
+ 800045c:	4a0c      	ldr	r2, [pc, #48]	@ (8000490 <_ZN16ButtonControllerC1Ev+0x118>)
+ 800045e:	f023 030c 	bic.w	r3, r3, #12
+ 8000462:	60d3      	str	r3, [r2, #12]
+        GPIOD->PUPDR |=  (2U << 2);
+ 8000464:	4b0a      	ldr	r3, [pc, #40]	@ (8000490 <_ZN16ButtonControllerC1Ev+0x118>)
+ 8000466:	68db      	ldr	r3, [r3, #12]
+ 8000468:	4a09      	ldr	r2, [pc, #36]	@ (8000490 <_ZN16ButtonControllerC1Ev+0x118>)
+ 800046a:	f043 0308 	orr.w	r3, r3, #8
+ 800046e:	60d3      	str	r3, [r2, #12]
+    }
+ 8000470:	687b      	ldr	r3, [r7, #4]
+ 8000472:	4618      	mov	r0, r3
+ 8000474:	370c      	adds	r7, #12
+ 8000476:	46bd      	mov	sp, r7
+ 8000478:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800047c:	4770      	bx	lr
+ 800047e:	bf00      	nop
+ 8000480:	40023800 	.word	0x40023800
+ 8000484:	40020000 	.word	0x40020000
+ 8000488:	40020400 	.word	0x40020400
+ 800048c:	40020800 	.word	0x40020800
+ 8000490:	40020c00 	.word	0x40020c00
+
+08000494 <_ZN16ButtonController8instanceEv>:
+
+public:
+    static ButtonController& instance()
+ 8000494:	b580      	push	{r7, lr}
+ 8000496:	af00      	add	r7, sp, #0
+    {
+        static ButtonController obj;
+ 8000498:	4b10      	ldr	r3, [pc, #64]	@ (80004dc <_ZN16ButtonController8instanceEv+0x48>)
+ 800049a:	681b      	ldr	r3, [r3, #0]
+ 800049c:	f3bf 8f5b 	dmb	ish
+ 80004a0:	f003 0301 	and.w	r3, r3, #1
+ 80004a4:	2b00      	cmp	r3, #0
+ 80004a6:	bf0c      	ite	eq
+ 80004a8:	2301      	moveq	r3, #1
+ 80004aa:	2300      	movne	r3, #0
+ 80004ac:	b2db      	uxtb	r3, r3
+ 80004ae:	2b00      	cmp	r3, #0
+ 80004b0:	d010      	beq.n	80004d4 <_ZN16ButtonController8instanceEv+0x40>
+ 80004b2:	480a      	ldr	r0, [pc, #40]	@ (80004dc <_ZN16ButtonController8instanceEv+0x48>)
+ 80004b4:	f000 f90f 	bl	80006d6 <__cxa_guard_acquire>
+ 80004b8:	4603      	mov	r3, r0
+ 80004ba:	2b00      	cmp	r3, #0
+ 80004bc:	bf14      	ite	ne
+ 80004be:	2301      	movne	r3, #1
+ 80004c0:	2300      	moveq	r3, #0
+ 80004c2:	b2db      	uxtb	r3, r3
+ 80004c4:	2b00      	cmp	r3, #0
+ 80004c6:	d005      	beq.n	80004d4 <_ZN16ButtonController8instanceEv+0x40>
+ 80004c8:	4805      	ldr	r0, [pc, #20]	@ (80004e0 <_ZN16ButtonController8instanceEv+0x4c>)
+ 80004ca:	f7ff ff55 	bl	8000378 <_ZN16ButtonControllerC1Ev>
+ 80004ce:	4803      	ldr	r0, [pc, #12]	@ (80004dc <_ZN16ButtonController8instanceEv+0x48>)
+ 80004d0:	f000 f90d 	bl	80006ee <__cxa_guard_release>
+        return obj;
+ 80004d4:	4b02      	ldr	r3, [pc, #8]	@ (80004e0 <_ZN16ButtonController8instanceEv+0x4c>)
+    }
+ 80004d6:	4618      	mov	r0, r3
+ 80004d8:	bd80      	pop	{r7, pc}
+ 80004da:	bf00      	nop
+ 80004dc:	2000002c 	.word	0x2000002c
+ 80004e0:	20000024 	.word	0x20000024
+
+080004e4 <_ZN16ButtonController7processER13USART3_Driver>:
+
+    void process(USART3_Driver& usart)
+ 80004e4:	b580      	push	{r7, lr}
+ 80004e6:	b084      	sub	sp, #16
+ 80004e8:	af00      	add	r7, sp, #0
+ 80004ea:	6078      	str	r0, [r7, #4]
+ 80004ec:	6039      	str	r1, [r7, #0]
+    {
+        uint8_t status1 = (GPIOA->IDR & (1U << 1)) ? 1 : 0;
+ 80004ee:	4b5a      	ldr	r3, [pc, #360]	@ (8000658 <_ZN16ButtonController7processER13USART3_Driver+0x174>)
+ 80004f0:	691b      	ldr	r3, [r3, #16]
+ 80004f2:	f003 0302 	and.w	r3, r3, #2
+ 80004f6:	2b00      	cmp	r3, #0
+ 80004f8:	d001      	beq.n	80004fe <_ZN16ButtonController7processER13USART3_Driver+0x1a>
+ 80004fa:	2301      	movs	r3, #1
+ 80004fc:	e000      	b.n	8000500 <_ZN16ButtonController7processER13USART3_Driver+0x1c>
+ 80004fe:	2300      	movs	r3, #0
+ 8000500:	73fb      	strb	r3, [r7, #15]
+        uint8_t status2 = (GPIOB->IDR & (1U << 1)) ? 1 : 0;
+ 8000502:	4b56      	ldr	r3, [pc, #344]	@ (800065c <_ZN16ButtonController7processER13USART3_Driver+0x178>)
+ 8000504:	691b      	ldr	r3, [r3, #16]
+ 8000506:	f003 0302 	and.w	r3, r3, #2
+ 800050a:	2b00      	cmp	r3, #0
+ 800050c:	d001      	beq.n	8000512 <_ZN16ButtonController7processER13USART3_Driver+0x2e>
+ 800050e:	2301      	movs	r3, #1
+ 8000510:	e000      	b.n	8000514 <_ZN16ButtonController7processER13USART3_Driver+0x30>
+ 8000512:	2300      	movs	r3, #0
+ 8000514:	73bb      	strb	r3, [r7, #14]
+        uint8_t status3 = (GPIOC->IDR & (1U << 1)) ? 1 : 0;
+ 8000516:	4b52      	ldr	r3, [pc, #328]	@ (8000660 <_ZN16ButtonController7processER13USART3_Driver+0x17c>)
+ 8000518:	691b      	ldr	r3, [r3, #16]
+ 800051a:	f003 0302 	and.w	r3, r3, #2
+ 800051e:	2b00      	cmp	r3, #0
+ 8000520:	d001      	beq.n	8000526 <_ZN16ButtonController7processER13USART3_Driver+0x42>
+ 8000522:	2301      	movs	r3, #1
+ 8000524:	e000      	b.n	8000528 <_ZN16ButtonController7processER13USART3_Driver+0x44>
+ 8000526:	2300      	movs	r3, #0
+ 8000528:	737b      	strb	r3, [r7, #13]
+        uint8_t status4 = (GPIOD->IDR & (1U << 1)) ? 1 : 0;
+ 800052a:	4b4e      	ldr	r3, [pc, #312]	@ (8000664 <_ZN16ButtonController7processER13USART3_Driver+0x180>)
+ 800052c:	691b      	ldr	r3, [r3, #16]
+ 800052e:	f003 0302 	and.w	r3, r3, #2
+ 8000532:	2b00      	cmp	r3, #0
+ 8000534:	d001      	beq.n	800053a <_ZN16ButtonController7processER13USART3_Driver+0x56>
+ 8000536:	2301      	movs	r3, #1
+ 8000538:	e000      	b.n	800053c <_ZN16ButtonController7processER13USART3_Driver+0x58>
+ 800053a:	2300      	movs	r3, #0
+ 800053c:	733b      	strb	r3, [r7, #12]
+
+        // BUTTON 1
+        if ((status1 == 1) && (prev_status1 == 0))
+ 800053e:	7bfb      	ldrb	r3, [r7, #15]
+ 8000540:	2b01      	cmp	r3, #1
+ 8000542:	d11b      	bne.n	800057c <_ZN16ButtonController7processER13USART3_Driver+0x98>
+ 8000544:	687b      	ldr	r3, [r7, #4]
+ 8000546:	791b      	ldrb	r3, [r3, #4]
+ 8000548:	2b00      	cmp	r3, #0
+ 800054a:	d117      	bne.n	800057c <_ZN16ButtonController7processER13USART3_Driver+0x98>
+        {
+            Delay::ms(50);
+ 800054c:	2032      	movs	r0, #50	@ 0x32
+ 800054e:	f7ff fe3b 	bl	80001c8 <_ZN5Delay2msEi>
+            if (GPIOA->IDR & (1U << 1))
+ 8000552:	4b41      	ldr	r3, [pc, #260]	@ (8000658 <_ZN16ButtonController7processER13USART3_Driver+0x174>)
+ 8000554:	691b      	ldr	r3, [r3, #16]
+ 8000556:	f003 0302 	and.w	r3, r3, #2
+ 800055a:	2b00      	cmp	r3, #0
+ 800055c:	bf14      	ite	ne
+ 800055e:	2301      	movne	r3, #1
+ 8000560:	2300      	moveq	r3, #0
+ 8000562:	b2db      	uxtb	r3, r3
+ 8000564:	2b00      	cmp	r3, #0
+ 8000566:	d009      	beq.n	800057c <_ZN16ButtonController7processER13USART3_Driver+0x98>
+            {
+                counter1++;
+ 8000568:	687b      	ldr	r3, [r7, #4]
+ 800056a:	781b      	ldrb	r3, [r3, #0]
+ 800056c:	3301      	adds	r3, #1
+ 800056e:	b2da      	uxtb	r2, r3
+ 8000570:	687b      	ldr	r3, [r7, #4]
+ 8000572:	701a      	strb	r2, [r3, #0]
+                usart.write('1');
+ 8000574:	2131      	movs	r1, #49	@ 0x31
+ 8000576:	6838      	ldr	r0, [r7, #0]
+ 8000578:	f7ff fed4 	bl	8000324 <_ZN13USART3_Driver5writeEh>
+            }
+        }
+
+        // BUTTON 2
+        if ((status2 == 1) && (prev_status2 == 0))
+ 800057c:	7bbb      	ldrb	r3, [r7, #14]
+ 800057e:	2b01      	cmp	r3, #1
+ 8000580:	d11b      	bne.n	80005ba <_ZN16ButtonController7processER13USART3_Driver+0xd6>
+ 8000582:	687b      	ldr	r3, [r7, #4]
+ 8000584:	795b      	ldrb	r3, [r3, #5]
+ 8000586:	2b00      	cmp	r3, #0
+ 8000588:	d117      	bne.n	80005ba <_ZN16ButtonController7processER13USART3_Driver+0xd6>
+        {
+            Delay::ms(50);
+ 800058a:	2032      	movs	r0, #50	@ 0x32
+ 800058c:	f7ff fe1c 	bl	80001c8 <_ZN5Delay2msEi>
+            if (GPIOB->IDR & (1U << 1))
+ 8000590:	4b32      	ldr	r3, [pc, #200]	@ (800065c <_ZN16ButtonController7processER13USART3_Driver+0x178>)
+ 8000592:	691b      	ldr	r3, [r3, #16]
+ 8000594:	f003 0302 	and.w	r3, r3, #2
+ 8000598:	2b00      	cmp	r3, #0
+ 800059a:	bf14      	ite	ne
+ 800059c:	2301      	movne	r3, #1
+ 800059e:	2300      	moveq	r3, #0
+ 80005a0:	b2db      	uxtb	r3, r3
+ 80005a2:	2b00      	cmp	r3, #0
+ 80005a4:	d009      	beq.n	80005ba <_ZN16ButtonController7processER13USART3_Driver+0xd6>
+            {
+                counter2++;
+ 80005a6:	687b      	ldr	r3, [r7, #4]
+ 80005a8:	785b      	ldrb	r3, [r3, #1]
+ 80005aa:	3301      	adds	r3, #1
+ 80005ac:	b2da      	uxtb	r2, r3
+ 80005ae:	687b      	ldr	r3, [r7, #4]
+ 80005b0:	705a      	strb	r2, [r3, #1]
+                usart.write('2');
+ 80005b2:	2132      	movs	r1, #50	@ 0x32
+ 80005b4:	6838      	ldr	r0, [r7, #0]
+ 80005b6:	f7ff feb5 	bl	8000324 <_ZN13USART3_Driver5writeEh>
+            }
+        }
+
+        // BUTTON 3
+        if ((status3 == 1) && (prev_status3 == 0))
+ 80005ba:	7b7b      	ldrb	r3, [r7, #13]
+ 80005bc:	2b01      	cmp	r3, #1
+ 80005be:	d11b      	bne.n	80005f8 <_ZN16ButtonController7processER13USART3_Driver+0x114>
+ 80005c0:	687b      	ldr	r3, [r7, #4]
+ 80005c2:	799b      	ldrb	r3, [r3, #6]
+ 80005c4:	2b00      	cmp	r3, #0
+ 80005c6:	d117      	bne.n	80005f8 <_ZN16ButtonController7processER13USART3_Driver+0x114>
+        {
+            Delay::ms(50);
+ 80005c8:	2032      	movs	r0, #50	@ 0x32
+ 80005ca:	f7ff fdfd 	bl	80001c8 <_ZN5Delay2msEi>
+            if (GPIOC->IDR & (1U << 1))
+ 80005ce:	4b24      	ldr	r3, [pc, #144]	@ (8000660 <_ZN16ButtonController7processER13USART3_Driver+0x17c>)
+ 80005d0:	691b      	ldr	r3, [r3, #16]
+ 80005d2:	f003 0302 	and.w	r3, r3, #2
+ 80005d6:	2b00      	cmp	r3, #0
+ 80005d8:	bf14      	ite	ne
+ 80005da:	2301      	movne	r3, #1
+ 80005dc:	2300      	moveq	r3, #0
+ 80005de:	b2db      	uxtb	r3, r3
+ 80005e0:	2b00      	cmp	r3, #0
+ 80005e2:	d009      	beq.n	80005f8 <_ZN16ButtonController7processER13USART3_Driver+0x114>
+            {
+                counter3++;
+ 80005e4:	687b      	ldr	r3, [r7, #4]
+ 80005e6:	789b      	ldrb	r3, [r3, #2]
+ 80005e8:	3301      	adds	r3, #1
+ 80005ea:	b2da      	uxtb	r2, r3
+ 80005ec:	687b      	ldr	r3, [r7, #4]
+ 80005ee:	709a      	strb	r2, [r3, #2]
+                usart.write('3');
+ 80005f0:	2133      	movs	r1, #51	@ 0x33
+ 80005f2:	6838      	ldr	r0, [r7, #0]
+ 80005f4:	f7ff fe96 	bl	8000324 <_ZN13USART3_Driver5writeEh>
+            }
+        }
+
+        // BUTTON 4
+        if ((status4 == 1) && (prev_status4 == 0))
+ 80005f8:	7b3b      	ldrb	r3, [r7, #12]
+ 80005fa:	2b01      	cmp	r3, #1
+ 80005fc:	d11b      	bne.n	8000636 <_ZN16ButtonController7processER13USART3_Driver+0x152>
+ 80005fe:	687b      	ldr	r3, [r7, #4]
+ 8000600:	79db      	ldrb	r3, [r3, #7]
+ 8000602:	2b00      	cmp	r3, #0
+ 8000604:	d117      	bne.n	8000636 <_ZN16ButtonController7processER13USART3_Driver+0x152>
+        {
+            Delay::ms(50);
+ 8000606:	2032      	movs	r0, #50	@ 0x32
+ 8000608:	f7ff fdde 	bl	80001c8 <_ZN5Delay2msEi>
+            if (GPIOD->IDR & (1U << 1))
+ 800060c:	4b15      	ldr	r3, [pc, #84]	@ (8000664 <_ZN16ButtonController7processER13USART3_Driver+0x180>)
+ 800060e:	691b      	ldr	r3, [r3, #16]
+ 8000610:	f003 0302 	and.w	r3, r3, #2
+ 8000614:	2b00      	cmp	r3, #0
+ 8000616:	bf14      	ite	ne
+ 8000618:	2301      	movne	r3, #1
+ 800061a:	2300      	moveq	r3, #0
+ 800061c:	b2db      	uxtb	r3, r3
+ 800061e:	2b00      	cmp	r3, #0
+ 8000620:	d009      	beq.n	8000636 <_ZN16ButtonController7processER13USART3_Driver+0x152>
+            {
+                counter4++;
+ 8000622:	687b      	ldr	r3, [r7, #4]
+ 8000624:	78db      	ldrb	r3, [r3, #3]
+ 8000626:	3301      	adds	r3, #1
+ 8000628:	b2da      	uxtb	r2, r3
+ 800062a:	687b      	ldr	r3, [r7, #4]
+ 800062c:	70da      	strb	r2, [r3, #3]
+                usart.write('4');
+ 800062e:	2134      	movs	r1, #52	@ 0x34
+ 8000630:	6838      	ldr	r0, [r7, #0]
+ 8000632:	f7ff fe77 	bl	8000324 <_ZN13USART3_Driver5writeEh>
+            }
+        }
+
+        // update previous
+        prev_status1 = status1;
+ 8000636:	687b      	ldr	r3, [r7, #4]
+ 8000638:	7bfa      	ldrb	r2, [r7, #15]
+ 800063a:	711a      	strb	r2, [r3, #4]
+        prev_status2 = status2;
+ 800063c:	687b      	ldr	r3, [r7, #4]
+ 800063e:	7bba      	ldrb	r2, [r7, #14]
+ 8000640:	715a      	strb	r2, [r3, #5]
+        prev_status3 = status3;
+ 8000642:	687b      	ldr	r3, [r7, #4]
+ 8000644:	7b7a      	ldrb	r2, [r7, #13]
+ 8000646:	719a      	strb	r2, [r3, #6]
+        prev_status4 = status4;
+ 8000648:	687b      	ldr	r3, [r7, #4]
+ 800064a:	7b3a      	ldrb	r2, [r7, #12]
+ 800064c:	71da      	strb	r2, [r3, #7]
+    }
+ 800064e:	bf00      	nop
+ 8000650:	3710      	adds	r7, #16
+ 8000652:	46bd      	mov	sp, r7
+ 8000654:	bd80      	pop	{r7, pc}
+ 8000656:	bf00      	nop
+ 8000658:	40020000 	.word	0x40020000
+ 800065c:	40020400 	.word	0x40020400
+ 8000660:	40020800 	.word	0x40020800
+ 8000664:	40020c00 	.word	0x40020c00
+
+08000668 <main>:
+};
+
+//main
+int main()
+{
+ 8000668:	b580      	push	{r7, lr}
+ 800066a:	b082      	sub	sp, #8
+ 800066c:	af00      	add	r7, sp, #0
+    auto& usart = USART3_Driver::instance();
+ 800066e:	f7ff fe31 	bl	80002d4 <_ZN13USART3_Driver8instanceEv>
+ 8000672:	6078      	str	r0, [r7, #4]
+    auto& buttons = ButtonController::instance();
+ 8000674:	f7ff ff0e 	bl	8000494 <_ZN16ButtonController8instanceEv>
+ 8000678:	6038      	str	r0, [r7, #0]
+
+    while (1)
+    {
+        buttons.process(usart);
+ 800067a:	6879      	ldr	r1, [r7, #4]
+ 800067c:	6838      	ldr	r0, [r7, #0]
+ 800067e:	f7ff ff31 	bl	80004e4 <_ZN16ButtonController7processER13USART3_Driver>
+ 8000682:	e7fa      	b.n	800067a <main+0x12>
+
+08000684 <Reset_Handler>:
+
+  .section .text.Reset_Handler
+  .weak Reset_Handler
+  .type Reset_Handler, %function
+Reset_Handler:
+  ldr   r0, =_estack
+ 8000684:	480d      	ldr	r0, [pc, #52]	@ (80006bc <LoopForever+0x2>)
+  mov   sp, r0          /* set stack pointer */
+ 8000686:	4685      	mov	sp, r0
+/* Call the clock system initialization function.*/
+  bl  SystemInit
+ 8000688:	f3af 8000 	nop.w
+
+/* Copy the data segment initializers from flash to SRAM */
+  ldr r0, =_sdata
+ 800068c:	480c      	ldr	r0, [pc, #48]	@ (80006c0 <LoopForever+0x6>)
+  ldr r1, =_edata
+ 800068e:	490d      	ldr	r1, [pc, #52]	@ (80006c4 <LoopForever+0xa>)
+  ldr r2, =_sidata
+ 8000690:	4a0d      	ldr	r2, [pc, #52]	@ (80006c8 <LoopForever+0xe>)
+  movs r3, #0
+ 8000692:	2300      	movs	r3, #0
+  b LoopCopyDataInit
+ 8000694:	e002      	b.n	800069c <LoopCopyDataInit>
+
+08000696 <CopyDataInit>:
+
+CopyDataInit:
+  ldr r4, [r2, r3]
+ 8000696:	58d4      	ldr	r4, [r2, r3]
+  str r4, [r0, r3]
+ 8000698:	50c4      	str	r4, [r0, r3]
+  adds r3, r3, #4
+ 800069a:	3304      	adds	r3, #4
+
+0800069c <LoopCopyDataInit>:
+
+LoopCopyDataInit:
+  adds r4, r0, r3
+ 800069c:	18c4      	adds	r4, r0, r3
+  cmp r4, r1
+ 800069e:	428c      	cmp	r4, r1
+  bcc CopyDataInit
+ 80006a0:	d3f9      	bcc.n	8000696 <CopyDataInit>
+
+/* Zero fill the bss segment. */
+  ldr r2, =_sbss
+ 80006a2:	4a0a      	ldr	r2, [pc, #40]	@ (80006cc <LoopForever+0x12>)
+  ldr r4, =_ebss
+ 80006a4:	4c0a      	ldr	r4, [pc, #40]	@ (80006d0 <LoopForever+0x16>)
+  movs r3, #0
+ 80006a6:	2300      	movs	r3, #0
+  b LoopFillZerobss
+ 80006a8:	e001      	b.n	80006ae <LoopFillZerobss>
+
+080006aa <FillZerobss>:
+
+FillZerobss:
+  str  r3, [r2]
+ 80006aa:	6013      	str	r3, [r2, #0]
+  adds r2, r2, #4
+ 80006ac:	3204      	adds	r2, #4
+
+080006ae <LoopFillZerobss>:
+
+LoopFillZerobss:
+  cmp r2, r4
+ 80006ae:	42a2      	cmp	r2, r4
+  bcc FillZerobss
+ 80006b0:	d3fb      	bcc.n	80006aa <FillZerobss>
+
+
+/* Call static constructors */
+  bl __libc_init_array
+ 80006b2:	f000 f81f 	bl	80006f4 <__libc_init_array>
+/* Call the application's entry point.*/
+
+  bl main
+ 80006b6:	f7ff ffd7 	bl	8000668 <main>
+
+080006ba <LoopForever>:
+
+LoopForever:
+  b LoopForever
+ 80006ba:	e7fe      	b.n	80006ba <LoopForever>
+  ldr   r0, =_estack
+ 80006bc:	20020000 	.word	0x20020000
+  ldr r0, =_sdata
+ 80006c0:	20000000 	.word	0x20000000
+  ldr r1, =_edata
+ 80006c4:	20000000 	.word	0x20000000
+  ldr r2, =_sidata
+ 80006c8:	0800075c 	.word	0x0800075c
+  ldr r2, =_sbss
+ 80006cc:	20000000 	.word	0x20000000
+  ldr r4, =_ebss
+ 80006d0:	20000030 	.word	0x20000030
+
+080006d4 <ADC_IRQHandler>:
+ * @retval : None
+*/
+  .section .text.Default_Handler,"ax",%progbits
+Default_Handler:
+Infinite_Loop:
+  b Infinite_Loop
+ 80006d4:	e7fe      	b.n	80006d4 <ADC_IRQHandler>
+
+080006d6 <__cxa_guard_acquire>:
+ 80006d6:	6802      	ldr	r2, [r0, #0]
+ 80006d8:	07d2      	lsls	r2, r2, #31
+ 80006da:	4603      	mov	r3, r0
+ 80006dc:	d405      	bmi.n	80006ea <__cxa_guard_acquire+0x14>
+ 80006de:	7842      	ldrb	r2, [r0, #1]
+ 80006e0:	b102      	cbz	r2, 80006e4 <__cxa_guard_acquire+0xe>
+ 80006e2:	deff      	udf	#255	@ 0xff
+ 80006e4:	2001      	movs	r0, #1
+ 80006e6:	7058      	strb	r0, [r3, #1]
+ 80006e8:	4770      	bx	lr
+ 80006ea:	2000      	movs	r0, #0
+ 80006ec:	4770      	bx	lr
+
+080006ee <__cxa_guard_release>:
+ 80006ee:	2301      	movs	r3, #1
+ 80006f0:	6003      	str	r3, [r0, #0]
+ 80006f2:	4770      	bx	lr
+
+080006f4 <__libc_init_array>:
+ 80006f4:	b570      	push	{r4, r5, r6, lr}
+ 80006f6:	4b0d      	ldr	r3, [pc, #52]	@ (800072c <__libc_init_array+0x38>)
+ 80006f8:	4d0d      	ldr	r5, [pc, #52]	@ (8000730 <__libc_init_array+0x3c>)
+ 80006fa:	1b5b      	subs	r3, r3, r5
+ 80006fc:	109c      	asrs	r4, r3, #2
+ 80006fe:	2600      	movs	r6, #0
+ 8000700:	42a6      	cmp	r6, r4
+ 8000702:	d109      	bne.n	8000718 <__libc_init_array+0x24>
+ 8000704:	f000 f81a 	bl	800073c <_init>
+ 8000708:	4d0a      	ldr	r5, [pc, #40]	@ (8000734 <__libc_init_array+0x40>)
+ 800070a:	4b0b      	ldr	r3, [pc, #44]	@ (8000738 <__libc_init_array+0x44>)
+ 800070c:	1b5b      	subs	r3, r3, r5
+ 800070e:	109c      	asrs	r4, r3, #2
+ 8000710:	2600      	movs	r6, #0
+ 8000712:	42a6      	cmp	r6, r4
+ 8000714:	d105      	bne.n	8000722 <__libc_init_array+0x2e>
+ 8000716:	bd70      	pop	{r4, r5, r6, pc}
+ 8000718:	f855 3b04 	ldr.w	r3, [r5], #4
+ 800071c:	4798      	blx	r3
+ 800071e:	3601      	adds	r6, #1
+ 8000720:	e7ee      	b.n	8000700 <__libc_init_array+0xc>
+ 8000722:	f855 3b04 	ldr.w	r3, [r5], #4
+ 8000726:	4798      	blx	r3
+ 8000728:	3601      	adds	r6, #1
+ 800072a:	e7f2      	b.n	8000712 <__libc_init_array+0x1e>
+ 800072c:	08000754 	.word	0x08000754
+ 8000730:	08000754 	.word	0x08000754
+ 8000734:	08000754 	.word	0x08000754
+ 8000738:	08000758 	.word	0x08000758
+
+0800073c <_init>:
+ 800073c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 800073e:	bf00      	nop
+ 8000740:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8000742:	bc08      	pop	{r3}
+ 8000744:	469e      	mov	lr, r3
+ 8000746:	4770      	bx	lr
+
+08000748 <_fini>:
+ 8000748:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 800074a:	bf00      	nop
+ 800074c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 800074e:	bc08      	pop	{r3}
+ 8000750:	469e      	mov	lr, r3
+ 8000752:	4770      	bx	lr
