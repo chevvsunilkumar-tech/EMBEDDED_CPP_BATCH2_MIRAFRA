@@ -1,0 +1,4 @@
+../Src/main.cpp:4:6:void delay(int)	24	static
+../Src/main.cpp:9:6:void init()	4	static
+../Src/main.cpp:19:6:void print()	8	static
+../Src/main.cpp:27:5:int main()	16	static

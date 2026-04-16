@@ -1,0 +1,10 @@
+../Src/main.cpp:12:5:LED::LED(int)	16	static
+../Src/main.cpp:18:5:LED::~LED()	16	static
+../Src/main.cpp:22:17:static void LED::LED_clock()	4	static
+../Src/main.cpp:27:10:void LED::on()	16	static
+../Src/main.cpp:32:10:void LED::off()	16	static
+../Src/main.cpp:37:10:void LED::toggle()	16	static
+../Src/main.cpp:46:6:void switch_init()	4	static
+../Src/main.cpp:52:6:void delay_ms(uint32_t)	24	static
+../Src/main.cpp:60:6:void off_all(LED**, int)	32	static
+../Src/main.cpp:75:5:int main()	64	static
